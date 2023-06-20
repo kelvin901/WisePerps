@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>String Analyzer</title>
+  <style>
+    body {
+      background-color: grey;
+      text-align: center;
+      font-size: larger;
+    }
+  </style>
+  <script type="text/javascript">
+    function hasTwoIdenticalLetters(string) {
+      for (var i = 0; i < string.length - 1; i++) {
+        if (string[i] === string[i + 1]) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function analyzeString() {
+      var inputString = document.getElementById("inputString").value;
+      var result = hasTwoIdenticalLetters(inputString);
+      document.getElementById("result").innerHTML = "Result: " + result;
+    }
+  </script>
+</head>
+<body>
+  <h1>String Analyzer</h1>
+  <label for="inputString">Enter a string:</label>
+  <input type="text" id="inputString" />
+  <button onclick="analyzeString()">Analyze</button>
+  <p id="result"></p>
+</body>
+</html>

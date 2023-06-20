@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1{
+            color: blue;
+        font-size: 22px;
+        text-align: center;
+        padding-bottom: 5%;
+        }
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: grey;
+          font-size: 20px;
+        }
+      </style>
+  <title>My Solution</title>
+  <script src="https://cdn.jsdelivr.net/npm/react/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <h1>Just</h1>
+   
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function differenceBetweenLargestAndSmallest(num) {
+      const numStr = num.toString();
+      const digits = numStr.split('').map(Number);
+      const ascendingOrder = digits.slice().sort((a, b) => a - b);
+      const descendingOrder = digits.slice().sort((a, b) => b - a);
+
+      const smallestNum = Number(ascendingOrder.join(''));
+      const largestNum = Number(descendingOrder.join(''));
+      const difference = largestNum - smallestNum;
+
+      return difference;
+    }
+
+    function App() {
+      const [number, setNumber] = React.useState('');
+      const [result, setResult] = React.useState('');
+
+      const calculateDifference = () => {
+        const difference = differenceBetweenLargestAndSmallest(number);
+        setResult(difference);
+      };
+
+      return (
+        <div>
+          <label>Enter a number: </label>
+          <input type="text" value={number} onChange={(e) => setNumber(e.target.value)} />
+          <button onClick={calculateDifference}>Calculate</button>
+          <p>Result: {result}</p>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

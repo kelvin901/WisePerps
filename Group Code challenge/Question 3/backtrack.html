@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combination Sum</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        #result {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Combination Sum</h1>
+    <form id="inputForm">
+        <label for="candidates">Candidates:</label>
+        <input type="text" id="candidates" required>
+        <br>
+        <label for="target">Target:</label>
+        <input type="number" id="target" required>
+        <br>
+        <input type="submit" value="Find Combinations">
+    </form>
+    <div id="result"></div>
+
+    <script>
+        // Function to find unique combinations
+        function findCombinations(candidates, target) {
+            const result = [];
+
+            // Recursive function to find combinations
+            function backtrack(combination, start, sum) {
+                if (sum === target) {
+                    result.push(combination.slice());
+                    return;
+                }
+                if (sum > target) {
+                    return;
+                }
+
+                for (let i = start; i < candidates.length; i++) {
+                    combination.push(candidates[i]);
+                    backtrack(combination, i, sum + candidates[i]);
+                    combination.pop();
+                }
+            }
+
+            backtrack([], 0, 0);
+            return result;
+        }
+
+        // Handle form submission
+        document.getElementById('inputForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get input values
+            const candidatesInput = document.getElementById('candidates').value;
+            const targetInput = parseInt(document.getElementById('target').value);
+
+            // Convert input string to array
+            const candidates = candidatesInput.split(',').map(Number);
+
+            // Call function to find combinations
+            const combinations = findCombinations(candidates, targetInput);
+
+            // Display result on the web page
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            combinations.forEach(function(combination) {
+                const p = document.createElement('p');
+                p.textContent = '[' + combination.join(', ') + ']';
+                resultDiv.appendChild(p);
+            });
+        });
+    </script>
+</body>
+</html>
